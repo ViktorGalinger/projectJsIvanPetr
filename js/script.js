@@ -1,21 +1,76 @@
-"use strict";
+/* Задание на урок:
 
-/* let str = "Viktor";
+1) Первую часть задания повторить по уроку
 
-console.log(str.toUpperCase()); //VIKTOR
-console.log(str.length); //6
+2) Создать функцию showMyDB, которая будет проверять свойство privat. Если стоит в позиции
+false - выводит в консоль главный объект программы
 
-const fruit = "Some fruit";
-console.log(fruit.indexOf("u")); //7 */
+3) Создать функцию writeYourGenres в которой пользователь будет 3 раза отвечать на вопрос 
+"Ваш любимый жанр под номером ${номер по порядку}". Каждый ответ записывается в массив данных
+genres
 
-/* const logg = " Hello world";
-console.log(logg.slice(7, 12)); //world  (11-до какого момента не включается!)
-console.log(logg.substring(7, 12)); // world
-console.log(logg.substr(7, 5)); // 1аргумент  - с какого символа, 2 аргумент - сколько символов.  */
+P.S. Функции вызывать не обязательно*/
 
-const num = 12.2;
-console.log(Math.round(num)); //округляется до ближайшего целого
+'use strict';
 
-const test = "12.2px";
-console.log(parseInt(test)); // Обрезается все, что после целого числа
-console.log(parseFloat(test)); // Обрезается все, что после числа с плавающей точкой
+let numberOfFilms;
+
+
+function start() {
+	numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+
+	while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
+		numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+	}
+}
+start();
+
+const personalMovieDB = {
+	count: numberOfFilms,
+	movies: {},
+	actors: {},
+	genres: [],
+	privat: false
+};
+
+function rememberMyFilms() {
+	for (let i = 0; i < 2; i++) {
+		let a = prompt('Один из последних просмотренных фильмов?', '');
+		let b = prompt('На сколько оцените его?', '');
+
+		if (a != '' && b != '' && a != null & b != null && a.length < 50) {
+			personalMovieDB.movies[a] = b;
+		} else {
+			i--;
+		}
+	}
+}
+/* rememberMyFilms(); */
+
+function detectPersonalLevel() {
+	if (personalMovieDB.count < 10) {
+		alert('Просмотрено довольно мало фильмов');
+	} else if (personalMovieDB.count >= 10 && personalMovieDB.count <= 30) {
+		alert('Вы классический зритель');
+	} else if (personalMovieDB.count > 30) {
+		alert('Вы киноман');
+	} else {
+		alert('Произошла ошибка');
+	}
+}
+/* detectPersonalLevel(); */
+
+function showMyDB(hidden) {
+	if (!hidden) {
+		console.log(personalMovieDB);
+	}
+}
+
+showMyDB(personalMovieDB.privat);
+
+function writeYourGenres() {
+	for (let i = 1; i <= 3; i++) {
+		personalMovieDB.genres[i - 1] = prompt(`Ваш любимый жанр под номером ${i}`);
+	}
+}
+writeYourGenres();
