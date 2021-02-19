@@ -1,33 +1,26 @@
-const btns = document.querySelectorAll("button"),
-	overlay = document.querySelector(".overlay");
+// console.log(document.documentElement);
 
-// btn.onclick = function () {
-// 	alert('Click');
-// };
+//! Узлы!
 
-let i = 0;
-const deleteElement = (event) => {
-	console.log(event.currentTarget);
-	console.log(event.type);
-	// i++;
-	// if (i == 1) {
-	// 	btn.removeEventListener('click', deleteElement);
-	// }
-};
+// console.log(document.body.childNodes); // Показывает всех дочерних узлов у body
+// console.log(document.body.firstChild);
+// console.log(document.body.lastChild);
+// console.log(document.querySelector("#current").parentNode); // Получить родителя(узел)
+// console.log(document.querySelector("#current").parentNode.parentNode); // Получить родителя - родителя(узел)
+// console.log(document.querySelector('[data-current="3"]').nextSibling); // Получаем следующий за ним элемент(узел)
+// console.log(document.querySelector('[data-current="3"]').previousSibling); // Получаем предыдущий за ним элемент(узел)
 
-// btn.addEventListener('click', deleteElement);
-// overlay.addEventListener('click', deleteElement);
+//! Элементы!
 
-// Отменяем стандартное поведение браузера
+// console.log(document.querySelector('[data-current="3"]').nextElementSibling); // Получаем следующий за ним элемент(не узел)
+// console.log(document.querySelector('[data-current="3"]').previousElementSibling); // Получаем предыдущий за ним элемент(не узел)
+// console.log(document.querySelector("#current").parentElement); // Получить элемент родителя(не узел!) 
+// console.log(document.body.firstElementChild); // Получаем элемент первого ребенка!
+// console.log(document.body.lastElementChild); // Получаем элемент последнего ребенка!
 
-btns.forEach(btn => {
-	btn.addEventListener('click', deleteElement, { once: true });
-});
-
-
-const link = document.querySelector('a');
-link.addEventListener('click', function (event) {
-	event.preventDefault();
-
-	console.log(event.target);
-});
+for (let node of document.body.childNodes) { // получаем все дочерние элементы, игнорируя текстовые ноды!
+	if (node.nodeName == '#text') {
+		continue;
+	}
+	console.log(node);
+}
